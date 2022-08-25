@@ -26,8 +26,8 @@ def get_blinking_ratio(eye_points, facial_landmarks):
     center_bottom = midpoint(facial_landmarks.part(eye_points[5]), facial_landmarks.part(eye_points[5]))
 
     # print Horizontal and Vertical Lines
-    #hor_line = cv2.line(frame, left_point, right_point, (0, 0, 255), 2)
-    #ver_line = cv2.line(frame, center_top, center_bottom, (0, 255, 0), 2)
+    # hor_line = cv2.line(frame, left_point, right_point, (0, 0, 255), 2)
+    # ver_line = cv2.line(frame, center_top, center_bottom, (0, 255, 0), 2)
 
     ver_line_length = hypot((center_top[0] - center_bottom[0]), (center_top[1] - center_bottom[1]))
     hor_line_length = hypot((left_point[0] - right_point[0]), (left_point[1] - right_point[1]))
@@ -72,7 +72,7 @@ while True:
                                     (landmarks.part(41).x, landmarks.part(41).y)], np.int32)
         # print(left_eye_region)
         # cv2.polylines(frame, [left_eye_region], True, (0, 0, 255), 2)
-        min_x =np.min(left_eye_region[:, 0])
+        min_x = np.min(left_eye_region[:, 0])
         max_x = np.max(left_eye_region[:, 0])
 
         min_y = np.min(left_eye_region[:, 1])
@@ -88,7 +88,10 @@ while True:
         threshold_eye = cv2.resize(threshold_eye, None, fx=5, fy=5)
         eye = cv2.resize(eye, None, fx=5, fy=5)
 
+        # display the eye in new window
         cv2.imshow("Eye", eye)
+
+        # display eye in grayscale in new window
         cv2.imshow("Threshold", threshold_eye)
 
     # Display
