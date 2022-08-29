@@ -56,7 +56,7 @@ while True:
         # detect blinking
         left_eye_ratio = get_blinking_ratio([36, 37, 38, 39, 40, 41], landmarks)
         right_eye_ratio = get_blinking_ratio([42, 43, 44, 45, 46, 47], landmarks)
-        blinking_ratio = (left_eye_ratio + right_eye_ratio)/2
+        blinking_ratio = (left_eye_ratio + right_eye_ratio) / 2
 
         if blinking_ratio > 5:
             cv2.putText(frame, "EyeBlink", (50, 150), font, 3, (255, 0, 0))
@@ -70,7 +70,16 @@ while True:
                                     (landmarks.part(39).x, landmarks.part(39).y),
                                     (landmarks.part(40).x, landmarks.part(40).y),
                                     (landmarks.part(41).x, landmarks.part(41).y)], np.int32)
+
         # print(left_eye_region)
+
+        # create a black screen for eye
+        height, width, _ = frame.shape
+        mask = np.zeros((height, width), np.uint8)
+        cv2.polylines(frame, [left_eye_region], True, 255, 2)
+        cv2.fillPoly(mask, [left_eye_region], 255)
+        left_eye = cv2.bitwise_and(gray, gray, mask=mask)
+
         # cv2.polylines(frame, [left_eye_region], True, (0, 0, 255), 2)
         min_x = np.min(left_eye_region[:, 0])
         max_x = np.max(left_eye_region[:, 0])
@@ -78,21 +87,23 @@ while True:
         min_y = np.min(left_eye_region[:, 1])
         max_y = np.max(left_eye_region[:, 1])
 
-        eye = frame[min_y: max_y, min_x: max_x]
+        gray_eye = left_eye[min_y: max_y, min_x: max_x]
 
         # gray scale the obtained eye
-        gray_eye = cv2.cvtColor(eye, cv2.COLOR_BGR2GRAY)
         _, threshold_eye = cv2.threshold(gray_eye, 70, 255, cv2.THRESH_BINARY)
 
         # resize the eye
         threshold_eye = cv2.resize(threshold_eye, None, fx=5, fy=5)
-        eye = cv2.resize(eye, None, fx=5, fy=5)
+        eye = cv2.resize(gray_eye, None, fx=5, fy=5)
 
         # display the eye in new window
         cv2.imshow("Eye", eye)
 
         # display eye in grayscale in new window
         cv2.imshow("Threshold", threshold_eye)
+
+        # display created black screen
+        cv2.imshow("Left Eye", left_eye)
 
     # Display
     cv2.imshow("Frame", frame)
