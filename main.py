@@ -91,6 +91,19 @@ while True:
 
         # gray scale the obtained eye
         _, threshold_eye = cv2.threshold(gray_eye, 70, 255, cv2.THRESH_BINARY)
+        height, width = threshold_eye.shape
+
+        left_side_threshold = threshold_eye[0: height, 0: int(width/2)]
+        left_side_white = cv2.countNonZero(left_side_threshold)
+
+        right_side_threshold = threshold_eye[0: height, int(width/2): width]
+        right_side_white = cv2.countNonZero(right_side_threshold)
+
+        gaze_ratio = left_side_white/right_side_white
+
+        cv2.putText(frame, str(gaze_ratio), (50, 150), font, 2, (0, 0, 255), 3)
+        # cv2.putText(frame, str(left_side_white), (50, 100), font, 2, (0, 0, 255), 3)
+        # cv2.putText(frame, str(right_side_white), (50, 150), font, 2, (0, 0, 255), 3)
 
         # resize the eye
         threshold_eye = cv2.resize(threshold_eye, None, fx=5, fy=5)
@@ -102,8 +115,11 @@ while True:
         # display eye in grayscale in new window
         cv2.imshow("Threshold", threshold_eye)
 
+        cv2.imshow("left", left_side_threshold)
+        cv2.imshow("right", right_side_threshold)
+
         # display created black screen
-        cv2.imshow("Left Eye", left_eye)
+        # cv2.imshow("Left Eye", left_eye)
 
     # Display
     cv2.imshow("Frame", frame)
