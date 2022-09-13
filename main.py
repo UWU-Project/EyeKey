@@ -17,7 +17,7 @@ detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 
 # Keyboard settings
-
+# Creating the Black Screen for Keyboard
 keyboard = np.zeros((600, 750, 3), np.uint8)
 keys_set_1 = {0: "1", 1: "2", 2: "3", 3: "4", 4: "5",
               5: "Q", 6: "W", 7: "E", 8: "R", 9: "T",
@@ -127,6 +127,7 @@ def draw_menu():
     cv2.putText(keyboard, "RIGHT", (50 + int(cols/2), 300), font, 6, (0, 255, 255), 5)
 
 
+# Calculate the Ratio between width and the Height of the Eye
 def midpoint(p1, p2):
     return int((p1.x + p2.x)/2), int((p1.y + p2.y)/2)
 
@@ -152,7 +153,7 @@ def get_blinking_ratio(eye_points, facial_landmarks):
     ratio = hor_line_lenght / ver_line_lenght
     return ratio
 
-
+# Draw Red Regions around the Eyes
 def eyes_contour_points(facial_landmarks):
     left_eye = []
     right_eye = []
@@ -218,11 +219,11 @@ def get_gaze_ratio(eye_points, facial_landmarks):
 frames = 0
 letter_index = 0
 blinking_frames = 0
-frames_to_blink = 6
-frames_active_letter = 9
+frames_to_blink = 7
+frames_active_letter = 12
 
 
-# Text and keyboard settings
+# Text and keyboard settings (Default Keyboard selection / Last Keyboard Selection)
 text = ""
 keyboard_selected = "left"
 last_keyboard_selected = "left"
