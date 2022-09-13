@@ -220,7 +220,7 @@ frames = 0
 letter_index = 0
 blinking_frames = 0
 frames_to_blink = 7
-frames_active_letter = 12
+frames_active_letter = 11
 
 
 # Text and keyboard settings (Default Keyboard selection / Last Keyboard Selection)
