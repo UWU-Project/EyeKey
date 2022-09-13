@@ -22,7 +22,8 @@ keyboard = np.zeros((600, 750, 3), np.uint8)
 keys_set_1 = {0: "1", 1: "2", 2: "3", 3: "4", 4: "5",
               5: "Q", 6: "W", 7: "E", 8: "R", 9: "T",
               10: "A", 11: "S", 12: "D", 13: "F", 14: "G",
-              15: "Z", 16: "X", 17: "C", 18: "V", 19: "<"}
+              15: "Z", 16: "X", 17: "C", 18: "V", 19: ">"}
+
 keys_set_2 = {0: "6", 1: "7", 2: "8", 3: "9", 4: "0",
               5: "Y", 6: "U", 7: "I", 8: "O", 9: "P",
               10: "H", 11: "J", 12: "K", 13: "L", 14: "/",
@@ -153,6 +154,7 @@ def get_blinking_ratio(eye_points, facial_landmarks):
     ratio = hor_line_lenght / ver_line_lenght
     return ratio
 
+
 # Draw Red Regions around the Eyes
 def eyes_contour_points(facial_landmarks):
     left_eye = []
@@ -168,6 +170,7 @@ def eyes_contour_points(facial_landmarks):
     left_eye = np.array(left_eye, np.int32)
     right_eye = np.array(right_eye, np.int32)
     return left_eye, right_eye
+
 
 # function to get Gaze ratio using left side white and right side white
 def get_gaze_ratio(eye_points, facial_landmarks):
@@ -323,7 +326,7 @@ while True:
 
                 # Typing letter
                 if blinking_frames == frames_to_blink:
-                    if active_letter != "<" and active_letter != "_":
+                    if active_letter != ">" and active_letter != "<" and active_letter != "_":
                         text += active_letter
                     if active_letter == "_":
                         text += " "
