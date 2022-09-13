@@ -7,6 +7,8 @@ The Keyboard for Handless Peoples
 ![img.png](images/img.png)
 ![img_1.png](images/img_1.png)
 
+![img_2.png](img_2.png)
+
 ![img.png](img.png)
 
 ![img_1.png](img_1.png)
