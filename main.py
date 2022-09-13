@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 import dlib
 from math import hypot
-import pyglet
-import time
+# import pyglet
+# import time
 
 # To capture video from webcam.
 cap = cv2.VideoCapture(0)
