@@ -9,3 +9,5 @@ The Keyboard for Handless Peoples
 
 ![img.png](img.png)
 
+![img_1.png](img_1.png)
+
