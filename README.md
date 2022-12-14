@@ -1,6 +1,6 @@
 # EyeKey
 
-The Keyboard for Handless Peoples
+The Keyboard for Disabled Peoples
 
 ![img_2.png](images/img_2.png)
 
@@ -12,4 +12,5 @@ The Keyboard for Handless Peoples
 ![img.png](img.png)
 
 ![img_1.png](img_1.png)
+
 
